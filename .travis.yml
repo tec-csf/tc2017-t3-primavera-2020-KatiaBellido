@@ -1,6 +1,6 @@
 compiler: gcc
 language: cpp
 script: 
-    - cd sources
+    - cd Sources
     - g++  gato.cpp -o check -std=c++17
     - ./check
