@@ -5,17 +5,26 @@
 #define NFIL 5
 #define NCOL 5
 using namespace std;
-
 char laberinto[NFIL][NCOL];
+int contador = 0;
 
 struct recorrido{
        int x;
        int y;
        struct recorrido *siguiente;
 };
-
+typedef struct recorrido *Lista;
+Lista reco = NULL;
 void printMaze()
 {
+    if (contador==0)
+    {
+        cout<<"\nMapa del Laberinto: "<<contador<<"\n"<<endl;
+    }
+    else
+    {     
+        cout<<"\nPaso número: "<<contador<<"\n"<<endl;
+    }
     for (int i = 0; i < NFIL; i++)
     {
         for (int j = 0; j < NCOL; j++)
@@ -150,6 +159,76 @@ void FinGenerar()
     }
 }
 
+void InsertReco(int x, int y)
+{
+     Lista q=new (struct recorrido);
+     q->x=x;
+     q->y=y;
+     q->siguiente=reco;
+     reco=q;
+     }
+
+bool Verificar(int x, int y)
+{
+     Lista q=reco;
+     while(q!=NULL)
+     {
+                   if(q->x==x && q->y==y) return false;
+                   q=q->siguiente;
+                   }
+                   return true;
+     }
+
+int goAheadInTheMaze(int i, int j)
+{
+    if(i<0)
+    {
+        i= -i;
+    }
+    int re=0;
+    if(laberinto[i][j+1]=='F')
+    {
+        laberinto[i][j]= '*';
+        contador++;
+        printMaze();
+        return 1;
+    }
+    laberinto[i][j]='*';
+    contador++;
+    printMaze();
+    if(laberinto[i][j+1]==' ' && re==0 && Verificar(i,j+1))
+    {
+        re=goAheadInTheMaze(i,j+1);//hacia adelante    
+    }
+    if(laberinto[i-1][j]==' ' && re==0 && Verificar(i-1,j))
+    { 
+        re=goAheadInTheMaze(i-1,j);//hacia arriba
+    }
+    if(laberinto[i+1][j]==' ' && re==0 && Verificar(i+1,j)) 
+    {
+        re=goAheadInTheMaze(i+1,j);//hacia abajo
+    }
+    //if(laberinto[i][j-1]==' ' && re==0 && Verificar(i,j-1)) re= goAheadInTheMaze(i,j-1);//hacia atras
+    if(re==1) return 1;
+    else
+    {
+        InsertReco(i,j);
+        laberinto[i][j]=' ';
+        }
+    return 0;
+}
+
+void findPath(int x)
+{
+    if (goAheadInTheMaze(x,1)==0)
+    {
+        cout<<"Sin solucion"<<endl;
+    }
+     else 
+    {
+     cout<<"Solucion encontrada!!"<<endl;
+    }
+}
 void iniciarMapa()
 {
     for (int i = 0; i < NFIL; i++)
@@ -165,28 +244,18 @@ void iniciarMapa()
             }
         }
     }
-}
-
-int goAheadInTheMaze()
-{
-    return 0;
+    srand (time(NULL));
+    int x=1+rand()%NFIL-2; 
+    generarCamino(x,1);
+    generarPared();
+    FinGenerar();
+    printMaze();
+    findPath(x);
 }
 int main()
 {
-    cout<<"Este es el laberinto"<<endl;
-    srand (time(NULL));
+    cout<<"LABERINTO CON BACKTRACKING"<<endl;
+    cout<<"El camino esta marcado con *\n Las Paredes dentro del laberinto estan"<<endl;
     iniciarMapa();
-    printMaze();
-    //!* esto va en iniciarMAPA
-    int x=1+rand()%NFIL-2; 
-    //x es el inicio, 1 es obligatorio para que encuentre un final
-    generarCamino(x,1);
-    generarPared();
-    
-    printMaze();
-    cout<<"prueba\n"<<endl;
-    FinGenerar();
-    //!*
-    printMaze();
     return 0;
 }
