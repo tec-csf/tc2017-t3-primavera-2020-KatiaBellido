@@ -56,8 +56,11 @@ void generarCamino(int i, int j)
                            {
                                       j++;
                                       laberinto[i][j]='O';
-                                      if(j==NCOL-2) laberinto[i][j]='F'; //F es el final del laberinto
+                                      if(j==NCOL-2 || (j==NCOL-2 && i==0)) 
+                                      {
+                                      laberinto[i][j]='F'; //F es el final del laberinto
                                       }
+                           }
                            break;
                       
                       
@@ -164,8 +167,13 @@ void iniciarMapa()
     }
 }
 
+int goAheadInTheMaze()
+{
+    return 0;
+}
 int main()
 {
+    cout<<"Este es el laberinto"<<endl;
     srand (time(NULL));
     iniciarMapa();
     printMaze();
