@@ -1,4 +1,5 @@
 #include <iostream>
+#include <time.h> 
 using namespace std;
 
 //define el tamaño de nuestro tablero
@@ -13,17 +14,17 @@ void seleccionCasilla(char tablerogato[N][N])
     int cont=0;
     int x = 0;
     int y = 0;
-        //checar en filas
+    //checar en filas
     for (int i = 0; i < N; i++)
     {
-        if (tablerogato[i][0]== tablerogato[i][1] && tablerogato[i][0]!=' ')
+        if (tablerogato[i][0]== tablerogato[i][1] && tablerogato[i][0]!=' ' && tablerogato[i][2]==' ')
         {
             px=i;
             py = 2;
             flag = 1;
             break;
         }
-        else if (tablerogato[i][1]== tablerogato[i][2]&& tablerogato[i][1]!=' ')
+        else if (tablerogato[i][1]== tablerogato[i][2]&& tablerogato[i][1]!=' '&& tablerogato[i][0]==' ')
         {
             px=i;
             py = 0;
@@ -36,14 +37,14 @@ void seleccionCasilla(char tablerogato[N][N])
     //checar columnas
     for (int i = 0; i < N; i++)
     {
-        if (tablerogato[0][i]== tablerogato[1][i] && flag == 0 && tablerogato[1][i]!=' ')
+        if (tablerogato[0][i]== tablerogato[1][i] && flag == 0 && tablerogato[1][i]!=' ' && tablerogato[2][i]==' ')
         {
             px=2;
             py=i;
             flag =1;
             break;
         }
-        else if (tablerogato[2][i]== tablerogato[1][i] && flag == 0 && tablerogato[1][i]!=' ')
+        else if (tablerogato[2][i]== tablerogato[1][i] && flag == 0 && tablerogato[1][i]!=' '&& tablerogato[0][i]==' ')
         {
             
             px=0;
@@ -52,13 +53,13 @@ void seleccionCasilla(char tablerogato[N][N])
             break;
         }
     }
-    
-    //necesita revision urgente
+    //checar diagonales
+
+
+    //necesita revision URGENTE
     if (flag ==0)
     {
-        //poner si nada de eso se cumple
-        for (int i = 0; i < N; i++)
-        {
+        for (int i = 0; i < N; i++){
             for (int j = 0; j < N; j++)
             {
                 if (tablerogato[i][j]!='O' && tablerogato[i][j]!='X'&& cont==0)
@@ -72,9 +73,6 @@ void seleccionCasilla(char tablerogato[N][N])
             }
         }
     }
-    
-
-    
 }
 
 bool revisarJuego(char final[N][N])
@@ -132,7 +130,12 @@ void printGame(char gato[N][N], int conteo)
 }
 void setwinner(char winner)
 {   
-    cout<< "El ganador es: "<< winner<<endl;
+    if (winner==' ')
+    {
+        cout<< "Hay empate wuuu"<<endl;
+    }
+    else
+        cout<< "El ganador es: "<< winner<<endl;
 }
 bool jugarGatohasta(char tab[N][N], int movimientos)
 {
@@ -140,42 +143,55 @@ bool jugarGatohasta(char tab[N][N], int movimientos)
     //base
     if(movimientos<1 || revisarJuego(tab)==1)
     {   
+        if (movimientos<1)
+        {
+            setwinner(' ');
+        }
         return false;
     }
-    if(movimientos == 9)
-    {
-        px=1;
-        py=1;
-    }
+    
     if(movimientos%2 == 0 )
     {
-
+        seleccionCasilla(tab);
         if (tab[px][py]!='X'&& tab[px][py]!='O')
         {
             tab[px][py]= 'O'; 
+            printGame(tab,++contador);
+            
         }
 
-        printGame(tab,++contador);
         if (revisarJuego(tab) == 1)
         {
             setwinner('O');
         }
         
     }
-    else if(tab[px][py]!='X'&& tab[px][py]!='O')
+    else if (movimientos%2 != 0 )
     {
-        tab[px][py]= 'X'; 
-        printGame(tab, ++contador);
-        if (revisarJuego(tab) == 1)
+        seleccionCasilla(tab);
+        if (movimientos == 9)
         {
-            setwinner('X');
+            px=1;
+            py=1;
         }
+    
+        if(tab[px][py]!='X'&& tab[px][py]!='O')
+        {
+        
+            tab[px][py]= 'X'; 
+            printGame(tab, ++contador);
+            if (revisarJuego(tab) == 1)
+            {
+                setwinner('X');
+            }
+        }
+
     }
+    
     else
     {
         printGame(tab, ++contador);
     }
-    seleccionCasilla(tab);
     jugarGatohasta(tab, --movimientos);
 
     return true;
@@ -190,8 +206,9 @@ void playgato()
 
 int main ()
 {
-    char tablero[N][N] = {{'X','X','X'},{'O','O','O'},{'X','O','X'}};
+    char tablero[N][N] = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
     printGame(tablero, 0);
+    cout<<"El tablero esta hecho para que inicie X en el centro"<<endl;
     playgato();
     return 0;
 }
