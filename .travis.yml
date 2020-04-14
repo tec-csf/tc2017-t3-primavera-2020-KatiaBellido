@@ -4,3 +4,5 @@ script:
     - cd Sources
     - g++  gato.cpp -o check -std=c++17
     - ./check
+    - g++  laberinto.cpp -o maze -std=c++17
+    - ./maze
