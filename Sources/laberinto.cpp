@@ -25,24 +25,6 @@ void printMaze()
         cout<<endl;
     }
 }
-
-void iniciarMapa()
-{
-    for (int i = 0; i < NFIL; i++)
-    {
-        for (int j = 0; j < NCOL; j++)
-        {
-            if(i==0 || j==0 || i==NFIL-1 || j==NCOL-1){
-                laberinto[i][j]='1';
-            }
-            else 
-            {
-                laberinto[i][j]=' ';
-            }
-        }
-    }
-}
-
 void generarCamino(int i, int j)
 {
     if(i<0)
@@ -82,15 +64,121 @@ void generarCamino(int i, int j)
              }                  
     }//fin while
 }
+void generarPared()
+{
+    int paredes=0;
+     while(paredes<(NFIL+NCOL)/3)
+     {
+        int x=rand()%NFIL;
+        int y=rand()%NCOL;
+        for (int i = 0; i < NFIL; i++)
+        {
+            for (int j = 0; j < NCOL; j++)
+            {  
+                if(laberinto[x][y]==' ')
+                {
+                    paredes++;
+                    int lim=1+rand()%10;
+                    int puestas=0;          
+                    switch(rand()%4)
+                    {
+                        case 0:
+                                                                    
+                            while(laberinto[x][y]==' ')//para arriba
+                            {
+                                if(puestas==lim)break;
+                                puestas++;
+                                laberinto[x][y]='P';
+                                x--;        
+                                }
+                                break;
+                        case 1:
+                            while(laberinto[x][y]==' ')//para abajo
+                            {
+                                if(puestas==lim)break;
+                                puestas++;
+                                laberinto[x][y]='P';
+                                x++;      
+                            }
+                                break;
+                        case 2:
+                            while(laberinto[x][y]==' ')//para atras
+                            {
+                                if(puestas==lim)break;
+                                puestas++;
+                                laberinto[x][y]='P';
+                                y--;        
+                            }
+                            break;
+                        case 3:
+                            while(laberinto[x][y]==' ')//para adelante
+                            {
+                                if(puestas==lim)break;
+                                puestas++;
+                                laberinto[x][y]='P';
+                                y++;      
+                            }
+                            break;
+                    }
+                }
+            }
+        }   
+    }
+}
+void FinGenerar()
+{
+     for(int i=0; i<NFIL; i++)
+     {
+        for(int j=0; j<NCOL-1; j++)
+        {
+            if(laberinto[i][j]=='O') laberinto[i][j]=' ';
+            //if(j==NCOL-2 && laberinto[i][j]=='0') laberinto[i][j]='P';
+            if(laberinto[i][j]=='F')
+            {
+                laberinto[i][j+1]='F';
+                laberinto[i][j]=' ';
+            }
+            if(laberinto[i][j]=='E')
+            {
+            laberinto[i][j-1]='E';
+            laberinto[i][j]=' ';
+            }
+        }
+    }
+}
+
+void iniciarMapa()
+{
+    for (int i = 0; i < NFIL; i++)
+    {
+        for (int j = 0; j < NCOL; j++)
+        {
+            if(i==0 || j==0 || i==NFIL-1 || j==NCOL-1){
+                laberinto[i][j]='1';
+            }
+            else 
+            {
+                laberinto[i][j]=' ';
+            }
+        }
+    }
+}
 
 int main()
 {
     srand (time(NULL));
     iniciarMapa();
     printMaze();
+    //!* esto va en iniciarMAPA
     int x=1+rand()%NFIL-2; 
     //x es el inicio, 1 es obligatorio para que encuentre un final
     generarCamino(x,1);
+    generarPared();
+    
+    printMaze();
+    cout<<"prueba\n"<<endl;
+    FinGenerar();
+    //!*
     printMaze();
     return 0;
 }

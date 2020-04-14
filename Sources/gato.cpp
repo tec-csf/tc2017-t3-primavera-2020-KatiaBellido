@@ -171,6 +171,7 @@ bool jugarGatohasta(char tab[N][N], int movimientos)
         seleccionCasilla(tab);
         if (movimientos == 9)
         {
+            //puede ser aleatorio... but wait 
             px=1;
             py=1;
         }
