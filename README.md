@@ -75,5 +75,7 @@ El backtracking se aplica en la función de recursividad goAheadInTheGame y la f
 ## 3. Referencias
 
 > http://www.lcc.uma.es/~av/Libro/
+
 > https://www.geeksforgeeks.org/backtracking-algorithms/
+
 > https://www.geeksforgeeks.org/structures-in-cpp/
