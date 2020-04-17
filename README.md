@@ -40,15 +40,15 @@ Para los dos ejercicios se utilizó el BackTracking. En el programa para resolve
 
 En el problema del juego "Gato", utilice una función iterativa para poder ordenar los resultados debido a que las posibles soluciones se encontrarían en las mismas posiciones. Tomando en cuenta que la función iterativa con complejidad O(n) llama a varias funciones con complejidad O(n^2). El código para poder jugar al gato cuenta con una complejidad **O(n^3)**;
 
-El backtracking se aplica en la función de selección de casilla en donde se analizan los movimientos de ambos jugadores para evitar o generar un movimiento ganador según de quien sea el turno. Se mueve por Columna o fila y analiza si hay dos posiciones consecutivas en la misma columna o fila con el mismo simbolo. Como ejemplo de esta comparación en el código, si ocurre esto: **tablerogato[move][i]==tablerogato[move+1][i], como estrategia se realizará el siguiente movimiento: tablerogato[move+2][i].**
+El backtracking se aplica en la función de selección de casilla en donde se analizan los movimientos de ambos jugadores para evitar o generar un movimiento ganador según de quien sea el turno. Se mueve por Columna o fila y analiza si hay dos posiciones consecutivas en la misma columna o fila con el mismo simbolo. Como ejemplo de esta comparación en el código, si ocurre esto: **tablerogato[move][i]==tablerogato[move+1][i]**, como estrategia se realizará el siguiente movimiento: **tablerogato[move+2][i].**
 
 En el problema de laberinto primero se buscó crear el mismo de forma aleatoria por lo que su complejidad de creación fue de O(n^3). Sin embargo para encontrar el camino solución se implementó una función de recursividad la que analizaba si podía seguir su camino ya sea hacia delante, arriba o abajo. Por lo tanto debido a las 3 posibilidades en el algoritmo la complejidad sería en el peor de los casos **O(3^n*m)** siendo n el numero de filas y m el de columnas. 
 
 El backtracking se aplica en la función de recursividad goAheadInTheGame y la función verificar, donde según dependa el caso se verifica si hay un espacio en blanco donde avanzar y permitirá volver a llamar a la función y continuar con el camino en una posible solución. En el caso que un camino ya haya sido visitado se guardara en una lista de estructura que se implementa en la función de verificar. Ejemplo de backtracking en la función: 
-    ** if(laberinto[i][j+1]==' ' && re==0 && Verificar(i,j+1))
-    {
-        re=goAheadInTheMaze(i,j+1);//hacia adelante    
-    } **   
+    **if(laberinto[i][j+1]==' ' && re==0 && Verificar(i,j+1))**
+    **{**
+        **re=goAheadInTheMaze(i,j+1);//hacia adelante**    
+    **}**
 
 ### 2.1 Pasos a seguir para utilizar la aplicación
 
