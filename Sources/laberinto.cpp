@@ -302,7 +302,7 @@ void iniciarMapa()
 int main()
 {
     cout<<"LABERINTO CON BACKTRACKING"<<endl;
-    cout<<"El camino esta marcado con *\n Las Paredes dentro del laberinto estan"<<endl;
+    cout<<"El camino esta marcado con *\nLas Paredes dentro del laberinto son representadas con una P\nLos limites del laberinto son representados con 1 "<<endl;
     iniciarMapa();
     return 0;
 }
