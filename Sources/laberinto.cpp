@@ -8,6 +8,9 @@ using namespace std;
 char laberinto[NFIL][NCOL];
 int contador = 0;
 
+/*
+* easier way that to create a tour than using a new class
+*/
 struct recorrido{
        int x;
        int y;
@@ -15,6 +18,12 @@ struct recorrido{
 };
 typedef struct recorrido *Lista;
 Lista reco = NULL;
+
+/*
+* printMaze prints the Maze while it's being solved 
+* @param none
+* @return void
+*/ 
 void printMaze()
 {
     if (contador==0)
@@ -34,6 +43,11 @@ void printMaze()
         cout<<endl;
     }
 }
+/*
+* generarCamino creates the path in the clear maze 
+* @param two int varibles that are read and used to set other variables 
+* @return void
+*/ 
 void generarCamino(int i, int j)
 {
     if(i<0)
@@ -76,6 +90,11 @@ void generarCamino(int i, int j)
              }                  
     }//fin while
 }
+/*
+* generarPared creates the walls in the maze without messing up with the path 
+* @param none 
+* @return void
+*/ 
 void generarPared()
 {
     int paredes=0;
@@ -137,6 +156,11 @@ void generarPared()
         }   
     }
 }
+/*
+* FinGenerar finishes the maze by making some changes 
+* @param none 
+* @return void
+*/ 
 void FinGenerar()
 {
      for(int i=0; i<NFIL; i++)
@@ -158,7 +182,11 @@ void FinGenerar()
         }
     }
 }
-
+/*
+* InsertReco function to add new placed passed
+* @param two int variables used for storage 
+* @return void
+*/ 
 void InsertReco(int x, int y)
 {
      Lista q=new (struct recorrido);
@@ -166,19 +194,29 @@ void InsertReco(int x, int y)
      q->y=y;
      q->siguiente=reco;
      reco=q;
-     }
+}
 
+/*
+* Verificar function to find if there is a blank space to go and save it
+* @param two int variables used for storage 
+* @return bool to check if it have already passed that
+*/ 
 bool Verificar(int x, int y)
 {
-     Lista q=reco;
-     while(q!=NULL)
-     {
-                   if(q->x==x && q->y==y) return false;
-                   q=q->siguiente;
-                   }
-                   return true;
-     }
+    Lista q=reco;
+    while(q!=NULL)
+    {
+        if(q->x==x && q->y==y) return false;
+        q=q->siguiente;
+    }
+    return true;
+}
 
+/*
+* goAheadInTheMaze recursive function to find a way out of the maze
+* @param two int variables that are read and modified 
+* @return int to check if there is a solution or not.
+*/ 
 int goAheadInTheMaze(int i, int j)
 {
     if(i<0)
@@ -217,7 +255,11 @@ int goAheadInTheMaze(int i, int j)
         }
     return 0;
 }
-
+/*
+* findPath used to find a way out of the maze calling goAheadInTheMaze function and prints it.
+* @param int variable used for the calling function and start  
+* @return void
+*/ 
 void findPath(int x)
 {
     if (goAheadInTheMaze(x,1)==0)
@@ -229,6 +271,11 @@ void findPath(int x)
      cout<<"Solucion encontrada!!"<<endl;
     }
 }
+/*
+* iniciarMapa initialize the matix and calls all the necessary functions
+* @param none  
+* @return void
+*/ 
 void iniciarMapa()
 {
     for (int i = 0; i < NFIL; i++)

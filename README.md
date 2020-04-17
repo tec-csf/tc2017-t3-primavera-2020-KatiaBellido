@@ -36,12 +36,37 @@ El proyecto debe seguir la siguiente estructura de carpetas:
 
 ## 2. Solución
 
-*[Incluya aquí una explicación de la solución implementada]*
+Para los dos ejercicios se utilizó el BackTracking. En el programa para resolver y jugar el juego gato se resolvió iterativamente, mientras que el laberinto cuenta con recursividad. Esto se debe al tamaño de su tablero y sus posibles resultados. 
+
+En el problema del juego "Gato", utilice una función iterativa para poder ordenar los resultados debido a que las posibles soluciones se encontrarían en las mismas posiciones. Tomando en cuenta que la función iterativa con complejidad O(n) llama a varias funciones con complejidad O(n^2). El código para poder jugar al gato cuenta con una complejidad O(n^3);
+
+El backtracking se aplica en la función de selección de casilla en donde se analizan los movimientos de ambos jugadores para evitar o generar un movimiento ganador según de quien sea el turno. Se mueve por Columna o fila y analiza si hay dos posiciones consecutivas en la misma columna o fila con el mismo simbolo. Como ejemplo de esta comparación en el código, si ocurre esto: tablerogato[move][i]==tablerogato[move+1][i], como estrategia se realizará el siguiente movimiento: tablerogato[move+2][i].
+
 
 ### 2.1 Pasos a seguir para utilizar la aplicación
 
-*[Incluya aquí una guía paso a paso para poder utilizar la aplicación, desde la clonación del repositorio, la compilación del código hasta la ejecución de los ejemplos para visualizar los resultados.]*
+#### Requisitos:
+
+* Contar con acceso a internet
+* Contar con una terminal
+	* La terminal debe tener gcc instalado
+	* La terminal debe tener git instalado
+	* La terminal debe poder clonar un repositorio de git (cuenta con acceso a la red)
+
+#### Para clonar el repositorio
+1. Crear una carpeta en la que se vaya a clonar el repositorio
+2. Mediante la terminal, navegar a dicha carpeta
+3. Correr el comando `git clone https://github.com/tec-csf/tc2017-t3-primavera-2020-KatiaBellido.git`
+
+#### Para correr el programa
+1. Mediante la terminal, navegar a la carpeta sources
+2. Para el primer problema correr el comando: `g++  gato.cpp -o check -std=c++17`
+3. Correr el comando: `./check`
+4. Para el segundo problema correr el comando: `g++  laberinto.cpp -o maze -std=c++17`
+5. Correr el comando: `./maze`
 
 ## 3. Referencias
 
-*[Incluya aquí las referencias a sitios de interés y cualquier otra información que haya utilizado para realizar la actividad y que le puedan ser de utilidad a otras personas que quieran usarlo como referencia]*
+> http://www.lcc.uma.es/~av/Libro/
+> https://www.geeksforgeeks.org/backtracking-algorithms/
+> https://www.geeksforgeeks.org/structures-in-cpp/
