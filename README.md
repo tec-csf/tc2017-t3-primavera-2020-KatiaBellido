@@ -38,9 +38,17 @@ El proyecto debe seguir la siguiente estructura de carpetas:
 
 Para los dos ejercicios se utilizó el BackTracking. En el programa para resolver y jugar el juego gato se resolvió iterativamente, mientras que el laberinto cuenta con recursividad. Esto se debe al tamaño de su tablero y sus posibles resultados. 
 
+#### Primer problema: Juego Gato
+
+El objetivo de jugar gato es lograr completar una fila, columna o diagonal con la misma ficha. Existen dos jugadores, y se van turnando uno por uno para colocar su ficha en el mismo tablero de 3X3, por lo tanto solo hay solo 9 turnos posibles. Al colocar una ficha los jugadores lo hacen aleatoriamente hasta que resulta prescindible hacer un movimiento estratégico, esto sería cuando se han colocado dos fichas juntas en cualquier dirección.
+
 En el problema del juego "Gato", utilice una función iterativa para poder ordenar los resultados debido a que las posibles soluciones se encontrarían en las mismas posiciones. Tomando en cuenta que la función iterativa con complejidad O(n) llama a varias funciones con complejidad O(n^2). El código para poder jugar al gato cuenta con una complejidad **O(n^3)**;
 
 El backtracking se aplica en la función de selección de casilla en donde se analizan los movimientos de ambos jugadores para evitar o generar un movimiento ganador según de quien sea el turno. Se mueve por Columna o fila y analiza si hay dos posiciones consecutivas en la misma columna o fila con el mismo simbolo. Como ejemplo de esta comparación en el código, si ocurre esto: **tablerogato[move][i]==tablerogato[move+1][i]**, como estrategia se realizará el siguiente movimiento: **tablerogato[move+2][i].**
+
+#### Segundo problema: Laberinto
+
+El objetivo de un Laberinto es poder salir del laberinto, el jugador se moverá dirección arriba, abajo o los lados. Avanzará buscando el final y en el caso que choque con una pared no volverá a pasar por ese lugar y avanzará en cualquier lado que no tenga una pared siempre buscando espacios libres avanzando. Entre más grande el laberinto más paredes existen y más difícil de completar.  
 
 En el problema de laberinto primero se buscó crear el mismo de forma aleatoria por lo que su complejidad de creación fue de O(n^3). Sin embargo para encontrar el camino solución se implementó una función de recursividad la que analizaba si podía seguir su camino ya sea hacia delante, arriba o abajo. Por lo tanto debido a las 3 posibilidades en el algoritmo la complejidad sería en el peor de los casos **O(3^n*m)** siendo n el numero de filas y m el de columnas. 
 
