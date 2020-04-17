@@ -252,7 +252,7 @@ int goAheadInTheMaze(int i, int j)
     {
         InsertReco(i,j);
         laberinto[i][j]=' ';
-        }
+    }
     return 0;
 }
 /*
