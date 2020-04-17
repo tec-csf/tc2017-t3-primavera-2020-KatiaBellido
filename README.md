@@ -53,10 +53,16 @@ El objetivo de un Laberinto es poder salir del laberinto, el jugador se moverá 
 En el problema de laberinto primero se buscó crear el mismo de forma aleatoria por lo que su complejidad de creación fue de O(n^3). Sin embargo para encontrar el camino solución se implementó una función de recursividad la que analizaba si podía seguir su camino ya sea hacia delante, arriba o abajo. Por lo tanto debido a las 3 posibilidades en el algoritmo la complejidad sería en el peor de los casos **O(3^n*m)** siendo n el numero de filas y m el de columnas. 
 
 El backtracking se aplica en la función de recursividad goAheadInTheGame y la función verificar, donde según dependa el caso se verifica si hay un espacio en blanco donde avanzar y permitirá volver a llamar a la función y continuar con el camino en una posible solución. En el caso que un camino ya haya sido visitado se guardara en una lista de estructura que se implementa en la función de verificar. Ejemplo de backtracking en la función: 
-    **if(laberinto[i][j+1]==' ' && re==0 && Verificar(i,j+1))**
-    **{**
-        **re=goAheadInTheMaze(i,j+1);//hacia adelante**    
-    **}**
+
+     if(laberinto[i][j+1]==' ' && re==0 && Verificar(i,j+1))
+  	{
+        re=goAheadInTheMaze(i,j+1);//hacia adelante    
+    	}
+    	if(laberinto[i-1][j]==' ' && re==0 && Verificar(i-1,j))
+    	{ 
+        re=goAheadInTheMaze(i-1,j);//hacia arriba
+    	}
+
 
 ### 2.1 Pasos a seguir para utilizar la aplicación
 
